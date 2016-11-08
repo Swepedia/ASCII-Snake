@@ -6,6 +6,9 @@ import jline.Terminal;
 public class Snake 
 {
 
+    static final int FRAMES_PER_SECOND = 10;
+    static final int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
+
     static char[][] board = new char[20][20];
     static char border = '.';
     static char dir = 0;
@@ -37,13 +40,19 @@ public class Snake
             board[i][board[0].length - 1] = border;
         }
 
-        display();
-        runtime.exit(0);
+        //display();
+        //runtime.exit(0);
 	
+        long nextTick = System.currentTimeMillis();
+        int sleep = 0;
         boolean run = true;
         KeyEvent kb;
 
-        while(run) {}
+        //Main loop
+        while(run) {
+            display();
+            Thread.sleep(SKIP_TICKS);
+        }
 
         
     }
@@ -83,7 +92,7 @@ public class Snake
                 }
                 System.out.println();
             }
-
+            System.out.println("Arrow keys to move. \'Ctrl + C\' to exit");
         }
 
     public static void keyPressed(KeyEvent e) {
