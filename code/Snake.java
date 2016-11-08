@@ -1,7 +1,5 @@
 import java.io.*;
-import java.util.Arrays;
 import java.awt.event.KeyEvent;
-import jline.Terminal;
 
 public class Snake {
 
@@ -13,8 +11,10 @@ public class Snake {
     static char dir = 0;
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-        //Opens a new console window to run the game in
+
+        //Opens a new console window to run the game in if it needs one
         Runtime runtime = Runtime.getRuntime();
+        Console console = System.console();
         if(System.console() == null) {
             try {
                 runtime.exec("cmd /c start cmd.exe");
@@ -23,7 +23,6 @@ public class Snake {
                 runtime.exit(1);
             }
         }
-        Console console = System.console();
 
         //Sets up the board with the border
         for(int i = 0; i < board.length; i++) {
@@ -42,6 +41,9 @@ public class Snake {
             Thread.sleep(SKIP_TICKS);
         }
     }
+
+
+
     public static void display() throws IOException, InterruptedException {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
