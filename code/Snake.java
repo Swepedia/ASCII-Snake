@@ -61,6 +61,7 @@ public class Snake {
             System.out.println();
         }
         System.out.println("Arrow keys to move. \'Ctrl + C\' to exit");
+        System.out.println(dir);
     }
 
     public static void keyPressed(KeyEvent e) {
