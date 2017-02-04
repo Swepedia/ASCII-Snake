@@ -11,7 +11,7 @@ public class Snake extends javax.swing.JFrame {
     static char dir = 0;
 
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    static private javax.swing.JTextArea jTextArea1;
 
     public Snake() {
         initComponents();
@@ -94,15 +94,24 @@ public class Snake extends javax.swing.JFrame {
             board[i][0] = border;
             board[i][board[0].length - 1] = border;
         }
+        String[] stringBoard = new String[20];
+        for(int i = 0; i < board.length; i++) {
+            stringBoard[i] = new String(board[i]);
+        }
+        for(int i = 0; i < board.length; i++) {
+            //System.out.println("i: " + i + "\nj: " + j);
+            jTextArea1.append(stringBoard[i] + "\n");
+        }
 
         boolean run = true;
         KeyEvent kb;
 
-        //Main loop
+        /*Main loop
         while(run) {
             display();
             Thread.sleep(SKIP_TICKS);
         }
+        */
     }
 
 
