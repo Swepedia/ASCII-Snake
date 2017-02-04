@@ -1,7 +1,7 @@
 import java.io.*;
 import java.awt.event.KeyEvent;
 
-public class Snake {
+public class Snake extends javax.swing.JFrame {
 
     static final int FRAMES_PER_SECOND = 10;
     static final int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
@@ -10,19 +10,55 @@ public class Snake {
     static char border = '.';
     static char dir = 0;
 
-	public static void main(String[] args) throws IOException, InterruptedException {
+    public Snake() {
+        initComponents();
+    }
 
-        //Opens a new console window to run the game in if it needs one
-        Runtime runtime = Runtime.getRuntime();
-        Console console = System.console();
-        if(System.console() == null) {
-            try {
-                runtime.exec("cmd /c start cmd.exe");
-            } catch(IOException e) {
-                System.out.println("IOException");
-                runtime.exit(1);
+    @SuppressWarnings("unchecked")
+
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Snake");
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
             }
-        }
+        });
+
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(0, 153, 0));
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                );
+
+        pack();
+    }
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {
+    }
+
+	public static void main(String[] args) throws IOException, InterruptedException {
 
         //Sets up the board with the border
         for(int i = 0; i < board.length; i++) {
