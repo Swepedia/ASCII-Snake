@@ -41,7 +41,7 @@ public class Snake extends javax.swing.JFrame {
         jTextArea1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(0, 153, 0));
         jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
+        jTextArea1.setRows(20);
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -52,13 +52,33 @@ public class Snake extends javax.swing.JFrame {
                 );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
                 );
 
         pack();
     }
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {
+        //keyPress(evt);
+        int keyCode = evt.getKeyCode();
+        switch(keyCode) {
+            case KeyEvent.VK_UP:
+                dir = 0;
+                System.out.println("Up");
+                break;
+            case KeyEvent.VK_RIGHT:
+                dir = 1;
+                System.out.println("Right");
+                break;
+            case KeyEvent.VK_DOWN:
+                dir = 2;
+                System.out.println("Down");
+                break;
+            case KeyEvent.VK_LEFT:
+                dir = 3;
+                System.out.println("Left");
+                break;
+        }
     }
 
 	public static void main(String[] args) throws IOException, InterruptedException {
@@ -98,9 +118,12 @@ public class Snake extends javax.swing.JFrame {
         for(int i = 0; i < board.length; i++) {
             stringBoard[i] = new String(board[i]);
         }
+        //NullPointerException might have to do with thread safety.
+        //Maybe try some exception handling or find a way to wait for the thread.
+        System.out.println(jTextArea1.getColumns());
         for(int i = 0; i < board.length; i++) {
-            //System.out.println("i: " + i + "\nj: " + j);
-            jTextArea1.append(stringBoard[i] + "\n");
+            //System.out.println("i: " + i);
+            //jTextArea1.append(stringBoard[i] + "\n");
         }
 
         boolean run = true;
@@ -136,21 +159,25 @@ public class Snake extends javax.swing.JFrame {
         System.out.println(dir);
     }
 
-    public static void keyPressed(KeyEvent e) {
+/*    public static void keyPress(KeyEvent e) {
         int keyCode = e.getKeyCode();
         switch(keyCode) {
             case KeyEvent.VK_UP:
                 dir = 0;
+                System.out.println("Up");
                 break;
             case KeyEvent.VK_RIGHT:
                 dir = 1;
+                System.out.println("Right");
                 break;
             case KeyEvent.VK_DOWN:
                 dir = 2;
+                System.out.println("Down");
                 break;
             case KeyEvent.VK_LEFT:
                 dir = 3;
+                System.out.println("Left");
                 break;
         }
-    }
+    }*/
 }
