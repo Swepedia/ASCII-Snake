@@ -1,7 +1,8 @@
 import java.io.*;
 import java.awt.event.KeyEvent;
+import java.lang.Thread;
 
-public class Snake extends javax.swing.JFrame {
+public class Snake extends javax.swing.JFrame { 
 
     static final int FRAMES_PER_SECOND = 10;
     static final int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
@@ -32,9 +33,23 @@ public class Snake extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
+
+        jTextArea1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
+
+        jScrollPane1.setFocusable(true);
         jScrollPane1.setBorder(null);
         jScrollPane1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
+        jTextArea1.setFocusable(true);
         jTextArea1.setEditable(false);
         jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea1.setColumns(20);
@@ -118,23 +133,20 @@ public class Snake extends javax.swing.JFrame {
         for(int i = 0; i < board.length; i++) {
             stringBoard[i] = new String(board[i]);
         }
-        //NullPointerException might have to do with thread safety.
-        //Maybe try some exception handling or find a way to wait for the thread.
-        System.out.println(jTextArea1.getColumns());
+        //Have to sleep the thread so that I don't get nullPointerException
+        Thread.sleep(1000);
         for(int i = 0; i < board.length; i++) {
-            //System.out.println("i: " + i);
-            //jTextArea1.append(stringBoard[i] + "\n");
+            jTextArea1.append(stringBoard[i] + "\n");
         }
 
         boolean run = true;
         KeyEvent kb;
 
-        /*Main loop
+        //Main loop
         while(run) {
-            display();
+            //display();
             Thread.sleep(SKIP_TICKS);
         }
-        */
     }
 
 
