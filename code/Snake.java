@@ -6,8 +6,10 @@ public class Snake extends javax.swing.JFrame {
 
     static final int FRAMES_PER_SECOND = 10;
     static final int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
+    static final int ROWS = 20;
+    static final int COLUMNS = ROWS * 2;
 
-    static char[][] board = new char[20][20];
+    static char[][] board = new char[ROWS][COLUMNS];
     static char border = '.';
     static char dir = 0;
 
@@ -52,11 +54,11 @@ public class Snake extends javax.swing.JFrame {
         jTextArea1.setFocusable(true);
         jTextArea1.setEditable(false);
         jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
-        jTextArea1.setColumns(20);
+        jTextArea1.setColumns(COLUMNS);
         jTextArea1.setFont(new java.awt.Font("monospaced", 0, 14)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(0, 153, 0));
         jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(20);
+        jTextArea1.setRows(ROWS);
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
