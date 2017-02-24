@@ -53,7 +53,7 @@ public class Snake extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("monospaced", 0, 14)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(0, 153, 0));
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(20);
@@ -138,6 +138,8 @@ public class Snake extends javax.swing.JFrame {
         for(int i = 0; i < board.length; i++) {
             jTextArea1.append(stringBoard[i] + "\n");
         }
+        //int temp = jTextArea1.getCaretPosition();
+        //jTextArea1.insert("test", 21);
 
         boolean run = true;
         KeyEvent kb;
