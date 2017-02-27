@@ -125,18 +125,12 @@ public class Snake extends javax.swing.JFrame {
         });
 
         //Sets up the board with the border
+        ////////////////////////////////////
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board[0].length; j++) {
                 board[i][j] = ' ';
             }
         }
-        /*for(int i = 0; i < board.length; i++) {
-            board[0][i] = border;
-            board[board.length - 1][i] = border;
-            board[i][0] = border;
-            board[i][board[0].length - 1] = border;
-        }
-        */
         for(int i = 0; i < board.length; i++) {
             board[i][0] = border;
             board[i][board[0].length - 1] = border;
@@ -149,13 +143,14 @@ public class Snake extends javax.swing.JFrame {
         for(int i = 0; i < board.length; i++) {
             stringBoard[i] = new String(board[i]);
         }
+
         //Have to sleep the thread so that I don't get nullPointerException
         Thread.sleep(1000);
         for(int i = 0; i < board.length; i++) {
             jTextArea1.append(stringBoard[i] + "\n");
         }
-        //int temp = jTextArea1.getCaretPosition();
-        //jTextArea1.insert("test", 21);
+        ////////////////////////////////////
+
 
         boolean run = true;
         KeyEvent kb;
