@@ -1,6 +1,8 @@
 import java.io.*;
 import java.awt.event.KeyEvent;
 import java.lang.Thread;
+import javax.swing.text.Document;
+import javax.swing.text.*;
 
 public class Snake extends javax.swing.JFrame { 
 
@@ -149,6 +151,15 @@ public class Snake extends javax.swing.JFrame {
         for(int i = 0; i < board.length; i++) {
             jTextArea1.append(stringBoard[i] + "\n");
         }
+        //Removes the last, empty line
+        int end = jTextArea1.getDocument().getLength();
+        Document doc = jTextArea1.getDocument();
+        try {
+            doc.remove(end - 1, 1);
+        }
+        catch(BadLocationException e) {
+            System.err.println("Bad location");
+        }
         ////////////////////////////////////
 
 
@@ -165,14 +176,6 @@ public class Snake extends javax.swing.JFrame {
 
 
     public static void display() throws IOException, InterruptedException {
-        try {
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        } catch(IOException e) {
-            System.out.println("IOException");
-        } catch(InterruptedException e) {
-            System.out.println("InterruptedException");
-        }
-
         //Prints the board to the console
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board[0].length; j++) {
