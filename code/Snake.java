@@ -100,6 +100,14 @@ public class Snake extends javax.swing.JFrame {
         }
     }
 
+    public int getRows() {
+        return ROWS;
+    }
+
+    public int getColumns() {
+        return COLUMNS;
+    }
+
 	public static void main(String[] args) throws IOException, InterruptedException {
 
         try {
@@ -176,36 +184,23 @@ public class Snake extends javax.swing.JFrame {
 
 
     public static void display() throws IOException, InterruptedException {
-        //Prints the board to the console
-        for(int i = 0; i < board.length; i++) {
-            for(int j = 0; j < board[0].length; j++) {
-                System.out.print(board[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println("Arrow keys to move. \'Ctrl + C\' to exit");
-        System.out.println(dir);
     }
 
-/*    public static void keyPress(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        switch(keyCode) {
-            case KeyEvent.VK_UP:
-                dir = 0;
-                System.out.println("Up");
-                break;
-            case KeyEvent.VK_RIGHT:
-                dir = 1;
-                System.out.println("Right");
-                break;
-            case KeyEvent.VK_DOWN:
-                dir = 2;
-                System.out.println("Down");
-                break;
-            case KeyEvent.VK_LEFT:
-                dir = 3;
-                System.out.println("Left");
-                break;
+    private class Pos {
+        private int pos;
+
+        public Pos(int x, int y) {
+            pos = x + (y * COLUMNS) + y;
         }
-    }*/
+
+        public int getPos() {
+            return pos;
+        }
+
+        public void setPos(int x, int y) {
+            pos = x + y + (y * COLUMNS);
+        }
+    }
 }
+
+
