@@ -3,6 +3,8 @@ import java.awt.event.KeyEvent;
 import java.lang.Thread;
 import javax.swing.text.Document;
 import javax.swing.text.*;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class Snake extends javax.swing.JFrame { 
 
@@ -13,7 +15,11 @@ public class Snake extends javax.swing.JFrame {
 
     static char[][] board = new char[ROWS][COLUMNS];
     static char border = '.';
+    static char snakeHead = '*';
     static char dir = 0;
+    static LinkedList<Pos> snake = new LinkedList<>();
+    //static Pos head = new Pos(COLUMNS / 2, ROWS / 2);
+    //static Pos tail = new Pos(COLUMNS / 2 - 3, ROWS / 2);
 
     private javax.swing.JScrollPane jScrollPane1;
     static private javax.swing.JTextArea jTextArea1;
@@ -172,33 +178,133 @@ public class Snake extends javax.swing.JFrame {
 
 
         boolean run = true;
-        KeyEvent kb;
+        snake.add(new Pos(COLUMNS / 2, ROWS / 2));
+        for(int i = 1; i < 3; i++) {
+            snake.add(new Pos(snake.peek().getX() - i, snake.peek().getY()));
+        }
+        snake.add(new Pos(COLUMNS / 2 - 3, ROWS / 2));
 
         //Main loop
         while(run) {
-            //display();
+            display();
             Thread.sleep(SKIP_TICKS);
         }
     }
 
 
 
-    public static void display() throws IOException, InterruptedException {
+    public static boolean display() throws IOException, InterruptedException {
+        boolean temp = false;
+        int index = 1;
+        int prevX = snake.get(0).getX();
+        int prevY = snake.get(0).getY();
+
+        ListIterator<Pos> iterate = snake.listIterator(0);
+
+        switch(dir) {
+            case 0:
+                if(snake.peek().getY() != 1) {
+                    iterate.next().setPos(prevX, prevY - 1);
+                    while(iterate.hasNext()) {
+                        if(temp) {
+                            prevX = snake.get(index).getX();
+                            prevY = snake.get(index).getY();
+                        }
+                        iterate.next().setPos(prevX, prevY);
+                        index++;
+                        temp = true;
+                    }
+                } else {
+                    return false;
+                }
+                break;
+            case 1:
+                if(snake.peek().getX() != 17) {
+                    iterate.next().setPos(prevX + 1, prevY);
+                    while(iterate.hasNext()) {
+                        if(temp) {
+                            prevX = snake.get(index).getX();
+                            prevY = snake.get(index).getY();
+                        }
+                        iterate.next().setPos(prevX, prevY);
+                        index++;
+                        temp = true;
+                    }
+                } else {
+                    return false;
+                }
+                break;
+            case 2:
+                if(snake.peek().getY() != 16) {
+                    iterate.next().setPos(prevX, prevY + 1);
+                    while(iterate.hasNext()) {
+                        if(temp) {
+                            prevX = snake.get(index).getX();
+                            prevY = snake.get(index).getY();
+                        }
+                        iterate.next().setPos(prevX, prevY);
+                        index++;
+                        temp = true;
+                    }
+                } else {
+                    return false;
+                }
+                break;
+            case 3:
+                if(snake.peek().getX() != 1) {
+                    iterate.next().setPos(prevX - 1, prevY);
+                    while(iterate.hasNext()) {
+                        if(temp) {
+                            prevX = snake.get(index).getX();
+                            prevY = snake.get(index).getY();
+                        }
+                        iterate.next().setPos(prevX, prevY);
+                        index++;
+                        temp = true;
+                    }
+                } else {
+                    return false;
+                }
+                break;
+        }
+        iterate = snake.listIterator(1);
+        Pos headNext = iterate.next();
+        jTextArea1.replaceRange(Character.toString(snakeHead), snake.peek().getPos(), snake.peek().getPos());
+        jTextArea1.replaceRange("0", headNext.getPos(), headNext.getPos());
+        return true;
     }
 
-    private class Pos {
+    private static class Pos {
         private int pos;
+        private int x;
+        private int y;
 
         public Pos(int x, int y) {
-            pos = x + (y * COLUMNS) + y;
+            this.x = x * 2 - 1;
+            this.y = y;
+            pos = (x * 2) - 1 + y + (y * COLUMNS);
         }
 
         public int getPos() {
             return pos;
         }
 
+        public int getRelPos() {
+            return x; 
+        }
+
+        public int getX() {
+            return (x + 1) / 2;
+        }
+
+        public int getY() {
+            return y;
+        }
+
         public void setPos(int x, int y) {
-            pos = x + y + (y * COLUMNS);
+            this.x = x * 2 - 1;
+            this.y = y;
+            pos = (x * 2) - 1 + y + (y * COLUMNS);
         }
     }
 }
