@@ -8,7 +8,7 @@ import java.util.ListIterator;
 
 public class Snake extends javax.swing.JFrame { 
 
-    static final int FRAMES_PER_SECOND = 7;
+    static final int FRAMES_PER_SECOND = 10;
     static final int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
     static final int ROWS = 17;
     static final int COLUMNS = ROWS * 2;
