@@ -222,7 +222,7 @@ public class Snake extends javax.swing.JFrame {
                 break;
             //Right
             case 1:
-                if(snake.peek().getX() != 17) {
+                if(snake.peek().getX() != (COLUMNS / 2) - 1) {
                     iterate.next().setPos(prevX + 1, prevY);
                     while(iterate.hasNext()) {
                         if(temp) {
@@ -239,7 +239,7 @@ public class Snake extends javax.swing.JFrame {
                 break;
             //Down
             case 2:
-                if(snake.peek().getY() != 16) {
+                if(snake.peek().getY() != ROWS - 2) {
                     iterate.next().setPos(prevX, prevY + 1);
                     while(iterate.hasNext()) {
                         if(temp) {
