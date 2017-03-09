@@ -8,7 +8,7 @@ import java.util.ListIterator;
 
 public class Snake extends javax.swing.JFrame { 
 
-    static final int FRAMES_PER_SECOND = 10;
+    static final int FRAMES_PER_SECOND = 7;
     static final int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
     static final int ROWS = 17;
     static final int COLUMNS = ROWS * 2;
@@ -205,7 +205,7 @@ public class Snake extends javax.swing.JFrame {
         switch(dir) {
             //Up
             case 0:
-                if(snake.peek().getY() != 1) {
+                if(snake.peek().getY() > 1) {
                     iterate.next().setPos(prevX, prevY - 1);
                     while(iterate.hasNext()) {
                         if(temp) {
@@ -222,7 +222,7 @@ public class Snake extends javax.swing.JFrame {
                 break;
             //Right
             case 1:
-                if(snake.peek().getX() != (COLUMNS / 2) - 1) {
+                if(snake.peek().getX() < (COLUMNS / 2) - 1) {
                     iterate.next().setPos(prevX + 1, prevY);
                     while(iterate.hasNext()) {
                         if(temp) {
@@ -239,7 +239,7 @@ public class Snake extends javax.swing.JFrame {
                 break;
             //Down
             case 2:
-                if(snake.peek().getY() != ROWS - 2) {
+                if(snake.peek().getY() < ROWS - 2) {
                     iterate.next().setPos(prevX, prevY + 1);
                     while(iterate.hasNext()) {
                         if(temp) {
@@ -256,7 +256,7 @@ public class Snake extends javax.swing.JFrame {
                 break;
             //Left
             case 3:
-                if(snake.peek().getX() != 1) {
+                if(snake.peek().getX() > 1) {
                     iterate.next().setPos(prevX - 1, prevY);
                     while(iterate.hasNext()) {
                         if(temp) {
@@ -275,7 +275,9 @@ public class Snake extends javax.swing.JFrame {
         //Display the snake
         //iterate = snake.listIterator(1);
         //Pos headNext = iterate.next();
-        jTextArea1.replaceRange(Character.toString(snakeHead), snake.peek().getPos(), snake.peek().getPos() + 1);
+        if(snake.peek().getPos() < new Pos(16, 16).getPos()) { 
+            jTextArea1.replaceRange(Character.toString(snakeHead), snake.peek().getPos(), snake.peek().getPos() + 1);
+        }
         //jTextArea1.replaceRange("0", headNext.getPos(), headNext.getPos());
         return true;
     }
