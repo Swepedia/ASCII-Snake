@@ -197,6 +197,7 @@ public class Snake extends javax.swing.JFrame {
         int index = 1;
         int prevX = snake.get(0).getX();
         int prevY = snake.get(0).getY();
+        Pos previousPosition = new Pos();
 
         ListIterator<Pos> iterate = snake.listIterator(0);
 
@@ -262,9 +263,12 @@ public class Snake extends javax.swing.JFrame {
         //Display the snake
         //iterate = snake.listIterator(1);
         //Pos headNext = iterate.next();
+        previousPosition.setPos(snake.peek().getX(), snake.peek().getY());
         if(snake.peek().getPos() < new Pos(16, 16).getPos()) { 
             jTextArea1.replaceRange(Character.toString(snakeHead), snake.peek().getPos(), snake.peek().getPos() + 1);
         }
+        //attempting to erase the parts of the snake that are not there anymore
+        jTextArea1.replaceRange(" ", previousPosition.getPos() - 1, previousPosition.getPos() + 1);
         //jTextArea1.replaceRange("0", headNext.getPos(), headNext.getPos());
         return true;
     }
@@ -277,6 +281,11 @@ public class Snake extends javax.swing.JFrame {
         public Pos(int x, int y) {
             this.x = x * 2 - 1;
             this.y = y;
+            pos = (x * 2) - 1 + y + (y * COLUMNS);
+        }
+        public Pos() {
+            this.x = 1;
+            this.y = 1;
             pos = (x * 2) - 1 + y + (y * COLUMNS);
         }
 
