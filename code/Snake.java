@@ -194,7 +194,6 @@ public class Snake extends javax.swing.JFrame {
 
 
     public static boolean display() throws IOException, InterruptedException {
-        boolean temp = false;
         int index = 1;
         int prevX = snake.get(0).getX();
         int prevY = snake.get(0).getY();
@@ -208,13 +207,10 @@ public class Snake extends javax.swing.JFrame {
                 if(snake.peek().getY() > 1) {
                     iterate.next().setPos(prevX, prevY - 1);
                     while(iterate.hasNext()) {
-                        if(temp) {
-                            prevX = snake.get(index).getX();
-                            prevY = snake.get(index).getY();
-                        }
+                        prevX = snake.get(index).getX();
+                        prevY = snake.get(index).getY();
                         iterate.next().setPos(prevX, prevY);
                         index++;
-                        temp = true;
                     }
                 } else {
                     return false;
@@ -225,13 +221,10 @@ public class Snake extends javax.swing.JFrame {
                 if(snake.peek().getX() < (COLUMNS / 2) - 1) {
                     iterate.next().setPos(prevX + 1, prevY);
                     while(iterate.hasNext()) {
-                        if(temp) {
-                            prevX = snake.get(index).getX();
-                            prevY = snake.get(index).getY();
-                        }
+                        prevX = snake.get(index).getX();
+                        prevY = snake.get(index).getY();
                         iterate.next().setPos(prevX, prevY);
                         index++;
-                        temp = true;
                     }
                 } else {
                     return false;
@@ -242,13 +235,10 @@ public class Snake extends javax.swing.JFrame {
                 if(snake.peek().getY() < ROWS - 2) {
                     iterate.next().setPos(prevX, prevY + 1);
                     while(iterate.hasNext()) {
-                        if(temp) {
-                            prevX = snake.get(index).getX();
-                            prevY = snake.get(index).getY();
-                        }
+                        prevX = snake.get(index).getX();
+                        prevY = snake.get(index).getY();
                         iterate.next().setPos(prevX, prevY);
                         index++;
-                        temp = true;
                     }
                 } else {
                     return false;
@@ -259,13 +249,10 @@ public class Snake extends javax.swing.JFrame {
                 if(snake.peek().getX() > 1) {
                     iterate.next().setPos(prevX - 1, prevY);
                     while(iterate.hasNext()) {
-                        if(temp) {
-                            prevX = snake.get(index).getX();
-                            prevY = snake.get(index).getY();
-                        }
+                        prevX = snake.get(index).getX();
+                        prevY = snake.get(index).getY();
                         iterate.next().setPos(prevX, prevY);
                         index++;
-                        temp = true;
                     }
                 } else {
                     return false;
