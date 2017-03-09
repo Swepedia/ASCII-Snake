@@ -16,7 +16,7 @@ public class Snake extends javax.swing.JFrame {
     static char[][] board = new char[ROWS][COLUMNS];
     static char border = '.';
     static char snakeHead = '*';
-    static char dir = 0;
+    static char dir = 1;
     static LinkedList<Pos> snake = new LinkedList<>();
     //static Pos head = new Pos(COLUMNS / 2, ROWS / 2);
     //static Pos tail = new Pos(COLUMNS / 2 - 3, ROWS / 2);
@@ -201,7 +201,9 @@ public class Snake extends javax.swing.JFrame {
 
         ListIterator<Pos> iterate = snake.listIterator(0);
 
+        //Cases to display the snake moving in different directions
         switch(dir) {
+            //Up
             case 0:
                 if(snake.peek().getY() != 1) {
                     iterate.next().setPos(prevX, prevY - 1);
@@ -218,6 +220,7 @@ public class Snake extends javax.swing.JFrame {
                     return false;
                 }
                 break;
+            //Right
             case 1:
                 if(snake.peek().getX() != 17) {
                     iterate.next().setPos(prevX + 1, prevY);
@@ -234,6 +237,7 @@ public class Snake extends javax.swing.JFrame {
                     return false;
                 }
                 break;
+            //Down
             case 2:
                 if(snake.peek().getY() != 16) {
                     iterate.next().setPos(prevX, prevY + 1);
@@ -250,6 +254,7 @@ public class Snake extends javax.swing.JFrame {
                     return false;
                 }
                 break;
+            //Left
             case 3:
                 if(snake.peek().getX() != 1) {
                     iterate.next().setPos(prevX - 1, prevY);
@@ -267,10 +272,11 @@ public class Snake extends javax.swing.JFrame {
                 }
                 break;
         }
-        iterate = snake.listIterator(1);
-        Pos headNext = iterate.next();
-        jTextArea1.replaceRange(Character.toString(snakeHead), snake.peek().getPos(), snake.peek().getPos());
-        jTextArea1.replaceRange("0", headNext.getPos(), headNext.getPos());
+        //Display the snake
+        //iterate = snake.listIterator(1);
+        //Pos headNext = iterate.next();
+        jTextArea1.replaceRange(Character.toString(snakeHead), snake.peek().getPos(), snake.peek().getPos() + 1);
+        //jTextArea1.replaceRange("0", headNext.getPos(), headNext.getPos());
         return true;
     }
 
