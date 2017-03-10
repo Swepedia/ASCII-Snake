@@ -263,12 +263,12 @@ public class Snake extends javax.swing.JFrame {
         //Display the snake
         //iterate = snake.listIterator(1);
         //Pos headNext = iterate.next();
-        previousPosition.setPos(snake.peek().getX(), snake.peek().getY());
+        //previousPosition.setPos(snake.peek().getX(), snake.peek().getY());
         if(snake.peek().getPos() < new Pos(16, 16).getPos()) { 
             jTextArea1.replaceRange(Character.toString(snakeHead), snake.peek().getPos(), snake.peek().getPos() + 1);
         }
         //attempting to erase the parts of the snake that are not there anymore
-        jTextArea1.replaceRange(" ", previousPosition.getPos() - 1, previousPosition.getPos() + 1);
+        //jTextArea1.replaceRange(" ", previousPosition.getPos() - 1, previousPosition.getPos() + 1);
         //jTextArea1.replaceRange("0", headNext.getPos(), headNext.getPos());
         return true;
     }
