@@ -1,1 +1,0 @@
-javac Snake.java 
