@@ -217,7 +217,6 @@ public class Snake extends javax.swing.JFrame {
                 Thread.sleep(SKIP_TICKS);
             }
             retry = false;
-            System.out.println("Retry loop");
             while(!retry) {
                 Thread.sleep(1000);
             }
@@ -350,6 +349,9 @@ public class Snake extends javax.swing.JFrame {
         if(snake.peek().getPos() == food.getPos()){
             snake.add(new Pos(prevX, prevY));
             food = getRandPos();
+            while(contains(food.getPos())) {
+                food = getRandPos();
+            }
         }
         return true;
     }
