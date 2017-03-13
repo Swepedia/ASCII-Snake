@@ -199,6 +199,10 @@ public class Snake extends javax.swing.JFrame {
             if(victory()) {
                 run = false;
             }
+            if(contains(snake.peekFirst().getPos())) {
+                defeat();
+                run = false;
+            }
             Thread.sleep(SKIP_TICKS);
         }
     }
@@ -354,6 +358,16 @@ public class Snake extends javax.swing.JFrame {
 
     private static void defeat() {
         jTextArea1.replaceRange(LOSE_TEXT, middle.getPos() - LOSE_TEXT.length() / 2, middle.getPos() + LOSE_TEXT.length() / 2);
+    }
+
+    private static boolean contains(int head) {
+        ListIterator<Pos> snakeIterator = snake.listIterator(1);
+        while(snakeIterator.hasNext()) {
+            if(snakeIterator.next().getPos() == head) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static class Pos {
