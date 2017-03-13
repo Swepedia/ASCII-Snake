@@ -35,6 +35,7 @@ public class Snake extends javax.swing.JFrame {
         initComponents();
     }
 
+    //This area before main()just sets up all the gui stuff
     @SuppressWarnings("unchecked")
 
     private void initComponents() {
@@ -196,12 +197,15 @@ public class Snake extends javax.swing.JFrame {
                 System.err.println("Bad location");
             }
 
+            //Reinitializes the snake and adds segments onto it
             snake = new LinkedList<Pos>();
             snake.add(new Pos(8, ROWS / 2));
             for(int i = 1; i <= 3; i++) {
                 snake.add(new Pos(snake.peek().getX() - i, snake.peek().getY()));
             }
             run = true;
+
+            //Game loop
             while(run) {
                 if(!display()) {
                     defeat();
@@ -217,6 +221,8 @@ public class Snake extends javax.swing.JFrame {
                 Thread.sleep(SKIP_TICKS);
             }
             retry = false;
+
+            //This loop waits to see if the user wants to retry
             while(!retry) {
                 Thread.sleep(1000);
             }
@@ -382,6 +388,7 @@ public class Snake extends javax.swing.JFrame {
         return false;
     }
 
+    //This class gets rid of a lot of potential headaches by abstracting the coordinates of the textArea
     private static class Pos {
         private int pos;
         private int x;
