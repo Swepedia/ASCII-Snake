@@ -14,6 +14,7 @@ public class Snake extends javax.swing.JFrame {
     static final int ROWS = 17;
     static final int COLUMNS = ROWS * 2;
     static final int MAX_SIZE = 225;
+    static final String WIN_TEXT = "==YOU WIN==";
 
     static char[][] board = new char[ROWS][COLUMNS];
     static char border = '.';
@@ -323,7 +324,7 @@ public class Snake extends javax.swing.JFrame {
 
     private static boolean victory() {
         if(snake.size() >= MAX_SIZE) {
-            jTextArea1.replaceRange("==YOU WIN==", middle.getPos(), middle.getPos() + 11);
+            jTextArea1.replaceRange(WIN_TEXT, middle.getPos(), middle.getPos() + 11);
             return true;
         }
         System.out.println(snake.size());
