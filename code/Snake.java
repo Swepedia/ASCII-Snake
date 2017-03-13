@@ -21,8 +21,7 @@ public class Snake extends javax.swing.JFrame {
     static char foodChar = '@';
     static LinkedList<Pos> snake = new LinkedList<>();
     static Pos food = getRandPos();
-    //static Pos head = new Pos(COLUMNS / 2, ROWS / 2);
-    //static Pos tail = new Pos(COLUMNS / 2 - 3, ROWS / 2);
+    static Pos middle = new Pos(COLUMNS / 4, ROWS / 2);
 
     private javax.swing.JScrollPane jScrollPane1;
     static private javax.swing.JTextArea jTextArea1;
@@ -190,6 +189,9 @@ public class Snake extends javax.swing.JFrame {
         //Main loop
         while(run) {
             display();
+            if(victory()) {
+                run = false;
+            }
             Thread.sleep(SKIP_TICKS);
         }
     }
@@ -316,6 +318,14 @@ public class Snake extends javax.swing.JFrame {
 
     private static Pos getRandPos() {
         return new Pos((int)(Math.random() * ((COLUMNS / 2) - 2)) + 1, (int)(Math.random() * (ROWS - 2)) + 1);
+    }
+
+    private static boolean victory() {
+        if(snake.size() >= 6) {
+            jTextArea1.replaceRange("==YOU WIN==", middle.getPos(), middle.getPos() + 11);
+            return true;
+        }
+        return false;
     }
 
     private static class Pos {
