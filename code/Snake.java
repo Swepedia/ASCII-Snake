@@ -26,6 +26,7 @@ public class Snake extends javax.swing.JFrame {
     static LinkedList<Pos> snake = new LinkedList<>();
     static Pos food = getRandPos();
     static Pos middle = new Pos(COLUMNS / 4, ROWS / 2);
+    static boolean retry = false;
 
     private javax.swing.JScrollPane jScrollPane1;
     static private javax.swing.JTextArea jTextArea1;
@@ -95,18 +96,22 @@ public class Snake extends javax.swing.JFrame {
         switch(keyCode) {
             case KeyEvent.VK_UP:
                 dir = 0;
+                retry = true;
                 //System.out.println("Up");
                 break;
             case KeyEvent.VK_RIGHT:
                 dir = 1;
+                retry = true;
                 //System.out.println("Right");
                 break;
             case KeyEvent.VK_DOWN:
                 dir = 2;
+                retry = true;
                 //System.out.println("Down");
                 break;
             case KeyEvent.VK_LEFT:
                 dir = 3;
+                retry = true;
                 //System.out.println("Left");
                 break;
         }
@@ -166,43 +171,56 @@ public class Snake extends javax.swing.JFrame {
             stringBoard[i] = new String(board[i]);
         }
 
-        //Have to sleep the thread so that I don't get nullPointerException
-        Thread.sleep(1000);
-        for(int i = 0; i < board.length; i++) {
-            jTextArea1.append(stringBoard[i] + "\n");
-        }
-        //Removes the last, empty line
-        int end = jTextArea1.getDocument().getLength();
-        Document doc = jTextArea1.getDocument();
-        try {
-            doc.remove(end - 1, 1);
-        }
-        catch(BadLocationException e) {
-            System.err.println("Bad location");
-        }
         ////////////////////////////////////
 
 
         boolean run = true;
-        snake.add(new Pos(8, ROWS / 2));
-        for(int i = 1; i <= 3; i++) {
-            snake.add(new Pos(snake.peek().getX() - i, snake.peek().getY()));
-        }
 
         //Main loop
-        while(run) {
-            if(!display()) {
-                defeat();
-                run = false;
+        while(true) {
+            //Have to sleep the thread so that I don't get nullPointerException
+            Thread.sleep(1000);
+            //Clears textArea
+            jTextArea1.setText("");
+            //Add board to screen
+            for(int i = 0; i < board.length; i++) {
+                jTextArea1.append(stringBoard[i] + "\n");
             }
-            if(victory()) {
-                run = false;
+            //Removes the last, empty line
+            int end = jTextArea1.getDocument().getLength();
+            Document doc = jTextArea1.getDocument();
+            try {
+                doc.remove(end - 1, 1);
             }
-            if(contains(snake.peekFirst().getPos())) {
-                defeat();
-                run = false;
+            catch(BadLocationException e) {
+                System.err.println("Bad location");
             }
-            Thread.sleep(SKIP_TICKS);
+
+            snake = new LinkedList<Pos>();
+            snake.add(new Pos(8, ROWS / 2));
+            for(int i = 1; i <= 3; i++) {
+                snake.add(new Pos(snake.peek().getX() - i, snake.peek().getY()));
+            }
+            run = true;
+            while(run) {
+                if(!display()) {
+                    defeat();
+                    run = false;
+                }
+                if(victory()) {
+                    run = false;
+                }
+                if(contains(snake.peekFirst().getPos())) {
+                    defeat();
+                    run = false;
+                }
+                Thread.sleep(SKIP_TICKS);
+            }
+            retry = false;
+            System.out.println("Retry loop");
+            while(!retry) {
+                Thread.sleep(1000);
+            }
         }
     }
 
@@ -325,14 +343,7 @@ public class Snake extends javax.swing.JFrame {
         if(snake.peek().getPos() < new Pos(16, 16).getPos()) { 
             jTextArea1.replaceRange(Character.toString(snakeHead), snake.peekFirst().getPos(), snake.peekFirst().getPos() + 1);
         }
-        //attempting to erase the parts of the snake that are not there anymore
-        /*System.out.println("snake 0: " + snake.get(0).getPos());
-        System.out.println("snake 1: " + snake.get(1).getPos());
-        System.out.println("snake 2: " + snake.get(2).getPos());
-        System.out.println("snake 3: " + snake.get(3).getPos());
-        System.out.println("prev. Pos: " + previousPosition.getPos());
-        */
-
+        //Erases the parts of the snake that are not there anymore
         jTextArea1.replaceRange(" ", previousPosition.getPos(), previousPosition.getPos() + 1);
 
         //Checks if the food has been eaten, if it has add a segment to the snake and make a new food appear
