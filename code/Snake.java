@@ -13,6 +13,7 @@ public class Snake extends javax.swing.JFrame {
     static final int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
     static final int ROWS = 17;
     static final int COLUMNS = ROWS * 2;
+    static final int MAX_SIZE = 225;
 
     static char[][] board = new char[ROWS][COLUMNS];
     static char border = '.';
@@ -91,19 +92,19 @@ public class Snake extends javax.swing.JFrame {
         switch(keyCode) {
             case KeyEvent.VK_UP:
                 dir = 0;
-                System.out.println("Up");
+                //System.out.println("Up");
                 break;
             case KeyEvent.VK_RIGHT:
                 dir = 1;
-                System.out.println("Right");
+                //System.out.println("Right");
                 break;
             case KeyEvent.VK_DOWN:
                 dir = 2;
-                System.out.println("Down");
+                //System.out.println("Down");
                 break;
             case KeyEvent.VK_LEFT:
                 dir = 3;
-                System.out.println("Left");
+                //System.out.println("Left");
                 break;
         }
     }
@@ -321,10 +322,11 @@ public class Snake extends javax.swing.JFrame {
     }
 
     private static boolean victory() {
-        if(snake.size() >= 6) {
+        if(snake.size() >= MAX_SIZE) {
             jTextArea1.replaceRange("==YOU WIN==", middle.getPos(), middle.getPos() + 11);
             return true;
         }
+        System.out.println(snake.size());
         return false;
     }
 
