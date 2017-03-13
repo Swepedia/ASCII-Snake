@@ -15,6 +15,7 @@ public class Snake extends javax.swing.JFrame {
     static final int COLUMNS = ROWS * 2;
     static final int MAX_SIZE = 225;
     static final String WIN_TEXT = "==YOU WIN==";
+    static final String LOSE_TEXT = "==YOU LOSE==";
 
     static char[][] board = new char[ROWS][COLUMNS];
     static char border = '.';
@@ -190,7 +191,10 @@ public class Snake extends javax.swing.JFrame {
 
         //Main loop
         while(run) {
-            display();
+            if(!display()) {
+                defeat();
+                run = false;
+            }
             if(victory()) {
                 run = false;
             }
@@ -329,6 +333,10 @@ public class Snake extends javax.swing.JFrame {
         }
         System.out.println(snake.size());
         return false;
+    }
+
+    private static void defeat() {
+        jTextArea1.replaceRange(LOSE_TEXT, middle.getPos() - LOSE_TEXT.length() / 2, middle.getPos() + LOSE_TEXT.length() / 2);
     }
 
     private static class Pos {
