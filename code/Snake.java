@@ -323,8 +323,8 @@ public class Snake extends javax.swing.JFrame {
     }
 
     private static boolean victory() {
-        if(snake.size() >= MAX_SIZE) {
-            jTextArea1.replaceRange(WIN_TEXT, middle.getPos(), middle.getPos() + 11);
+        if(snake.size() >= 6) {
+            jTextArea1.replaceRange(WIN_TEXT, middle.getPos() - WIN_TEXT.length() / 2, middle.getPos() + 1 + WIN_TEXT.length() / 2);
             return true;
         }
         System.out.println(snake.size());
