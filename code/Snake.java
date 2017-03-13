@@ -186,9 +186,8 @@ public class Snake extends javax.swing.JFrame {
         boolean run = true;
         snake.add(new Pos(8, ROWS / 2));
         for(int i = 1; i <= 3; i++) {
-            snake.add(new Pos(snake.peek().getX() + i, snake.peek().getY()));
+            snake.add(new Pos(snake.peek().getX() - i, snake.peek().getY()));
         }
-        //snake.add(new Pos(COLUMNS / 2 - 3, ROWS / 2));
 
         //Main loop
         while(run) {
