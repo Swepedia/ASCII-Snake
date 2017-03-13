@@ -22,7 +22,6 @@ public class Snake extends javax.swing.JFrame {
     static final int COLUMNS = ROWS * 2;
     static final int MAX_SIZE = 225;
     static final String WIN_TEXT = "==YOU WIN==";
-    static final String LOSE_TEXT = "==YOU LOSE==";
 
     static char[][] board = new char[ROWS][COLUMNS];
     static char border = '.';
@@ -382,7 +381,8 @@ public class Snake extends javax.swing.JFrame {
     }
 
     private static void defeat() {
-        jTextArea1.replaceRange(LOSE_TEXT, middle.getPos() - LOSE_TEXT.length() / 2, middle.getPos() + LOSE_TEXT.length() / 2);
+        String score = Integer.toString(snake.size() - 1);
+        jTextArea1.replaceRange("Score: " + score, middle.getPos() - score.length() / 2, middle.getPos() + 7 + score.length() / 2);
     }
 
     private static boolean contains(int head) {
