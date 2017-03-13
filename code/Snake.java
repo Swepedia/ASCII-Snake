@@ -1,3 +1,10 @@
+//@author: Maxwell Heeschen
+//@email: gorpmaster@gmail.com
+//@version: 1.0
+//@date: March 13, 2017
+//
+//This thing right here is a clone of Snake, I made it because I wanted to make a simple ASCII game
+
 import java.io.*;
 import java.awt.event.KeyEvent;
 import java.lang.Thread;
