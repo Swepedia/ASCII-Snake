@@ -27,7 +27,6 @@ public class Snake extends javax.swing.JFrame {
     static final int LEFT = 3;
     static final String WIN_TEXT = "==YOU WIN==";
 
-    static char border = '.';
     static char snakeHead = '*';
     static char dir = 1;
     static char tempDir = 1;
@@ -153,6 +152,7 @@ public class Snake extends javax.swing.JFrame {
         ////////////////////////////////////
 
         char[][] board = new char[ROWS][COLUMNS];
+        char border = '.';
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board[0].length; j++) {
                 board[i][j] = ' ';
