@@ -21,6 +21,10 @@ public class Snake extends javax.swing.JFrame {
     static final int ROWS = 17;
     static final int COLUMNS = ROWS * 2;
     static final int MAX_SIZE = 225;
+    static final int UP = 0;
+    static final int RIGHT = 1;
+    static final int DOWN = 2;
+    static final int LEFT = 3;
     static final String WIN_TEXT = "==YOU WIN==";
 
     static char[][] board = new char[ROWS][COLUMNS];
@@ -102,24 +106,20 @@ public class Snake extends javax.swing.JFrame {
         int keyCode = evt.getKeyCode();
         switch(keyCode) {
             case KeyEvent.VK_UP:
-                dir = 0;
+                dir = UP;
                 retry = true;
-                //System.out.println("Up");
                 break;
             case KeyEvent.VK_RIGHT:
-                dir = 1;
+                dir = RIGHT;
                 retry = true;
-                //System.out.println("Right");
                 break;
             case KeyEvent.VK_DOWN:
-                dir = 2;
+                dir = DOWN;
                 retry = true;
-                //System.out.println("Down");
                 break;
             case KeyEvent.VK_LEFT:
-                dir = 3;
+                dir = LEFT;
                 retry = true;
-                //System.out.println("Left");
                 break;
         }
     }
