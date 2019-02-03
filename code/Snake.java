@@ -27,7 +27,6 @@ public class Snake extends javax.swing.JFrame {
     static final int LEFT = 3;
     static final String WIN_TEXT = "==YOU WIN==";
 
-    static char[][] board = new char[ROWS][COLUMNS];
     static char border = '.';
     static char snakeHead = '*';
     static char dir = 1;
@@ -124,14 +123,6 @@ public class Snake extends javax.swing.JFrame {
         }
     }
 
-    public int getRows() {
-        return ROWS;
-    }
-
-    public int getColumns() {
-        return COLUMNS;
-    }
-
 	public static void main(String[] args) throws IOException, InterruptedException {
 
         try {
@@ -160,6 +151,8 @@ public class Snake extends javax.swing.JFrame {
 
         //Sets up the board with the border
         ////////////////////////////////////
+
+        char[][] board = new char[ROWS][COLUMNS];
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board[0].length; j++) {
                 board[i][j] = ' ';
