@@ -29,10 +29,8 @@ public class Snake extends javax.swing.JFrame {
 
     static char snakeHead = '*';
     static char dir = 1;
-    static char tempDir = 1;
     static char foodChar = '@';
     static LinkedList<Pos> snake = new LinkedList<>();
-    static Pos food = getRandPos();
     static Pos middle = new Pos(COLUMNS / 4, ROWS / 2);
     static boolean retry = false;
 
@@ -237,6 +235,7 @@ public class Snake extends javax.swing.JFrame {
         int prevY = snake.peekFirst().getY();
         int prevNextX = snake.peekFirst().getX();
         int prevNextY = snake.peekFirst().getY();
+        Pos food = getRandPos();
         Pos previousPosition = snake.peekLast();
         ListIterator<Pos> iterate = snake.listIterator(0);
 
@@ -244,6 +243,7 @@ public class Snake extends javax.swing.JFrame {
         jTextArea1.replaceRange(Character.toString(foodChar), food.getPos(), food.getPos() + 1);
 
         //Cases to display the snake moving in different directions
+        char tempDir = 1;
         switch(dir) {
             //Up
             case 0:
